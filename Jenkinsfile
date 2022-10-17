@@ -10,8 +10,9 @@ pipeline {
                 branch 'master'  //only run these steps on the master branch
             }
 
-            // Jenkins Stage to Build the Docker Image
-
+            steps {
+                echo 'Build'// Jenkins Stage to Build the Docker Image
+            }
         }
 
         stage('Publish Image') {
@@ -19,7 +20,9 @@ pipeline {
                 branch 'master'  //only run these steps on the master branch
             }
             
-            // Jenkins Stage to Publish the Docker Image to Dockerhub or any Docker repository of your choice.
+            steps {
+                echo 'Publish' // Jenkins Stage to Publish the Docker Image to Dockerhub or any Docker repository of your choice.
+            } 
 
         }
     }
