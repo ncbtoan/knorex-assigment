@@ -36,8 +36,8 @@ pipeline {
             //     branch 'master'
             // }
             steps {
-                echo 'Build Iamge'
-                docker build -t toannguyen3355/knorex-python:latest .
+                sh 'echo Build Image'
+                sh 'docker build -t $DOCKER_ID/knorex-python:latest .'
             }
         }
 
@@ -46,9 +46,9 @@ pipeline {
             //     branch 'master'
             // }
             steps {
-                echo 'Publish Image'
-                docker login --username=$DOCKER_ID --pasword=$DOCKER_PASSWORD
-                docker push $DOCKER_ID/knorex-python:latest
+                sh 'echo Publish Image'
+                sh 'docker login --username=$DOCKER_ID --pasword=$DOCKER_PASSWORD'
+                sh 'docker push $DOCKER_ID/knorex-python:latest'
             }
         }
       
