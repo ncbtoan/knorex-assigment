@@ -31,22 +31,23 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Build Image') {
+            when {
+                branch 'master'
+            }
             steps {
-                echo 'Build App'
+                echo 'Build Iamge'
             }
         }
 
-        stage('Test') {
+        stage('Publish Image') {
+            when {
+                branch 'master'
+            }
             steps {
-                echo 'Test App'
+                echo 'Publish Image'
             }
         }
-
-        stage('Hello') {
-            steps {
-                echo 'Deploy App'
-            }
-        }
+      
     }
 }
