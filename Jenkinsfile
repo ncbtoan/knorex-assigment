@@ -37,7 +37,7 @@ pipeline {
             // }
             steps {
                 echo 'Build Iamge'
-                docker build -t knorex-python:latest .
+                docker build -t toannguyen3355/knorex-python:latest .
             }
         }
 
