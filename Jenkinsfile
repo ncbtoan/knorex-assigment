@@ -32,20 +32,23 @@ pipeline {
 
     stages {
         stage('Build Image') {
-            when {
-                branch 'master'
-            }
+            // when {
+            //     branch 'master'
+            // }
             steps {
                 echo 'Build Iamge'
+                docker build -t knorex-python:latest .
             }
         }
 
         stage('Publish Image') {
-            when {
-                branch 'master'
-            }
+            // when {
+            //     branch 'master'
+            // }
             steps {
                 echo 'Publish Image'
+                docker login --username=$DOCKER_ID --pasword=$DOCKER_PASSWORD
+                docker push $DOCKER_ID/knorex-python:latest
             }
         }
       
