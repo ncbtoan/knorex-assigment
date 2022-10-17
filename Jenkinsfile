@@ -1,53 +1,26 @@
-// #!/usr/bin/env groovy
-// pipeline {
-//     agent {
-//         node any
-//     }
 
-//     stages {
-//         stage('Build Image') {
-//             when {
-//                 branch 'master'  //only run these steps on the master branch
-//             }
-
-//             steps {
-//                 echo 'Build'// Jenkins Stage to Build the Docker Image
-//             }
-//         }
-
-//         stage('Publish Image') {
-//             when {
-//                 branch 'master'  //only run these steps on the master branch
-//             }
-            
-//             steps {
-//                 echo 'Publish' // Jenkins Stage to Publish the Docker Image to Dockerhub or any Docker repository of your choice.
-//             } 
-
-//         }
-//     }
-// }
 pipeline {
     agent any
 
     stages {
         stage('Build Image') {
-            // when {
-            //     branch 'master'
-            // }
+            when {
+                branch 'master'
+            }
             steps {
                 sh 'echo Build Image'
-                sh 'docker build -t $DOCKER_ID/knorex-python:latest .'
+                sh 'docker build -t $DOCKER_ID/knorex-python:latest .' //could be a better way to tag the image, using "git rev-parse --short HEAD", get the commit hash 
+                                                                       //tag the image
             }
         }
 
         stage('Publish Image') {
-            // when {
-            //     branch 'master'
-            // }
+            when {
+                branch 'master'
+            }
             steps {
                 sh 'echo Publish Image'
-                sh 'docker login --username=$DOCKER_ID --pasword=$DOCKER_PASSWORD'
+                sh 'docker login --username=$DOCKER_ID --pasword=$DOCKER_PASSWORD' //using parameter from jenkins to login Dockerhub
                 sh 'docker push $DOCKER_ID/knorex-python:latest'
             }
         }
